@@ -1,0 +1,17 @@
+{
+  "name": "react-native-multipliable-field",
+  "version": "1.0.0",
+  "description": "React Native multipliable field component ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Hello"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "multipliable",
+    "field"
+  ],
+  "author": "Eduardo Henrique",
+  "license": "MIT"
+}
