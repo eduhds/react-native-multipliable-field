@@ -59,11 +59,16 @@ export default function MultipliableField({
             {fields.map((item, index) => {
                 switch (type) {
                     case 'custom':
-                        return <>{customField({ item, index })}</>;
+                        return (
+                            <View key={index}>
+                                {customField({ item, index })}
+                            </View>
+                        );
                     default:
                         return (
                             <TextInput
                                 {...textInputProps}
+                                key={index}
                                 placeholder={`${placeholder} ${
                                     fields.length > 1 ? `(${index + 1})` : ''
                                 }`}
