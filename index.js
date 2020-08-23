@@ -23,7 +23,8 @@ export default function MultipliableField({
     buttonPlusStyle,
     customButtonMinus,
     customButtonPlus,
-    textInputProps
+    textInputProps,
+    enable = true
 }) {
     if (fields.length === 0) {
         fields[0] = customFormatValue || '';
@@ -69,6 +70,7 @@ export default function MultipliableField({
                             <TextInput
                                 {...textInputProps}
                                 key={index}
+                                editable={enable}
                                 placeholder={`${placeholder} ${
                                     fields.length > 1 ? `(${index + 1})` : ''
                                 }`}
@@ -80,51 +82,56 @@ export default function MultipliableField({
                 }
             })}
 
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    alignItems: 'center',
-                    marginVertical: 5
-                }}>
-                {showMinus() && (
+            {enable && (
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        marginVertical: 5
+                    }}>
+                    {showMinus() && (
+                        <TouchableOpacity
+                            onPress={onMinus || removeField}
+                            style={[Styles.touchButtonPlusMinus]}>
+                            {customButtonMinus || (
+                                <View
+                                    style={[
+                                        Styles.buttonPlusMinus,
+                                        buttonMinusStyle
+                                    ]}>
+                                    <Text
+                                        style={[
+                                            Styles.textButtonPlusMinu,
+                                            textButtonStyle
+                                        ]}>
+                                        -
+                                    </Text>
+                                </View>
+                            )}
+                        </TouchableOpacity>
+                    )}
                     <TouchableOpacity
-                        onPress={onMinus || removeField}
+                        onPress={onPlus || addField}
                         style={[Styles.touchButtonPlusMinus]}>
-                        {customButtonMinus || (
+                        {customButtonPlus || (
                             <View
                                 style={[
                                     Styles.buttonPlusMinus,
-                                    buttonMinusStyle
+                                    buttonPlusStyle
                                 ]}>
                                 <Text
                                     style={[
                                         Styles.textButtonPlusMinu,
                                         textButtonStyle
                                     ]}>
-                                    -
+                                    +
                                 </Text>
                             </View>
                         )}
                     </TouchableOpacity>
-                )}
-
-                <TouchableOpacity
-                    onPress={onPlus || addField}
-                    style={[Styles.touchButtonPlusMinus]}>
-                    {customButtonPlus || (
-                        <View style={[Styles.buttonPlusMinus, buttonPlusStyle]}>
-                            <Text
-                                style={[
-                                    Styles.textButtonPlusMinu,
-                                    textButtonStyle
-                                ]}>
-                                +
-                            </Text>
-                        </View>
-                    )}
-                </TouchableOpacity>
-            </View>
+                </View>
+            )}
         </View>
     );
 }
